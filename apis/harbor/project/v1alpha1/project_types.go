@@ -1,30 +1,32 @@
 package v1alpha1
 
 import (
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+    xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // ProjectParameters parameters to pass to ForProvider
 type ProjectParameters struct {
-	Public       bool  `json:"public,omitempty"`
-	StorageLimit int64 `json:"storageLimit,omitempty"`
+    Public       bool  `json:"public,omitempty"`
+    StorageLimit int64 `json:"storageLimit,omitempty"`
 }
 
 // ProjectSpec spec for the project
 type ProjectSpec struct {
-	xpv1.ResourceSpec `json:",inline"`
-	ForProvider       ProjectParameters `json:"forProvider,omitempty"`
+    xpv1.ResourceSpec `json:",inline"`
+    ForProvider       ProjectParameters `json:"forProvider,omitempty"`
 }
 
 // ProjectStatus status for the project
 type ProjectStatus struct {
-	xpv1.ResourceStatus `json:",inline"`
-	AtProvider          ProjectObservation `json:"atProvider,omitempty"`
+    xpv1.ResourceStatus `json:",inline"`
+    AtProvider          ProjectObservation `json:"atProvider,omitempty"`
 }
 
 // A ProjectObservation represents the observed state of a Harbor Project.
 type ProjectObservation struct {
+    ProjectID int32  `json:"ProjectID,omitempty"`
+    Name      string `json:"name,omitempty"`
 }
 
 // A Project is a managed resource that represents a Harbor Project
@@ -35,18 +37,18 @@ type ProjectObservation struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={harbor,managed}
 type Project struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+    metav1.TypeMeta   `json:",inline"`
+    metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   ProjectSpec   `json:"spec"`
-	Status ProjectStatus `json:"status,omitempty"`
+    Spec   ProjectSpec   `json:"spec"`
+    Status ProjectStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
 // ProjectList contains a list of Project items
 type ProjectList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Project `json:"items"`
+    metav1.TypeMeta `json:",inline"`
+    metav1.ListMeta `json:"metadata,omitempty"`
+    Items           []Project `json:"items"`
 }

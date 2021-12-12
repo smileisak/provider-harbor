@@ -113,6 +113,12 @@ spec:
               atProvider:
                 description: A ProjectObservation represents the observed state of
                   a Harbor Project.
+                properties:
+                  ProjectID:
+                    format: int32
+                    type: integer
+                  name:
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
