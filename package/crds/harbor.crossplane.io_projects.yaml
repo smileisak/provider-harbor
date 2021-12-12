@@ -45,6 +45,7 @@ spec:
           metadata:
             type: object
           spec:
+            description: ProjectSpec spec for the project
             properties:
               deletionPolicy:
                 default: Delete
@@ -56,12 +57,12 @@ spec:
                 - Delete
                 type: string
               forProvider:
+                description: ProjectParameters parameters to pass to ForProvider
                 properties:
-                  name:
-                    type: string
                   public:
                     type: boolean
                   storageLimit:
+                    format: int64
                     type: integer
                 type: object
               providerConfigRef:
@@ -107,6 +108,7 @@ spec:
                 type: object
             type: object
           status:
+            description: ProjectStatus status for the project
             properties:
               atProvider:
                 description: A ProjectObservation represents the observed state of

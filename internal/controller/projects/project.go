@@ -4,18 +4,22 @@ import (
 	"context"
 	"fmt"
 
+	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/provider-harbor/apis/harbor/project/v1alpha1"
 	"github.com/mittwald/goharbor-client/v5/apiv2"
+	"github.com/mittwald/goharbor-client/v5/apiv2/model"
 	"github.com/pkg/errors"
 )
 
 const (
-	errNotProject   = "managed resource is not an Project custom resource"
-	errTrackPCUsage = "cannot track ProviderConfig usage"
-	errGetPC        = "cannot get ProviderConfig"
-	errGetCreds     = "cannot get credentials"
+	errNotProject      = "managed resource is not an Project custom resource"
+	errTrackPCUsage    = "cannot track ProviderConfig usage"
+	errGetPC           = "cannot get ProviderConfig"
+	errGetCreds        = "cannot get credentials"
+	errProjectNotFound = "project not found on server side"
 )
 
 // External observes, then either creates, updates, or deletes an
@@ -33,8 +37,16 @@ func (e *External) Observe(ctx context.Context, mg resource.Managed) (managed.Ex
 		return managed.ExternalObservation{}, errors.New(errNotProject)
 	}
 
-	// These fmt statements should be removed in the real implementation.
-	fmt.Printf("Observing: %+v", cr)
+	externalName := meta.GetExternalName(cr)
+	if externalName == "" {
+		return managed.ExternalObservation{ResourceExists: false}, nil
+	}
+
+	_, err := e.client.GetProject(ctx, externalName)
+	if err != nil {
+		return managed.ExternalObservation{ResourceExists: false}, nil
+	}
+	cr.Status.AtProvider = v1alpha1.ProjectObservation{}
 
 	return managed.ExternalObservation{
 		// Return false when the external resource does not exist. This lets
@@ -60,7 +72,21 @@ func (e *External) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 		return managed.ExternalCreation{}, errors.New(errNotProject)
 	}
 
-	fmt.Printf("Creating: %+v", cr)
+	cr.SetConditions(xpv1.Creating())
+
+	projectReq := &model.ProjectReq{
+		CVEAllowlist: nil,
+		ProjectName:  cr.Name,
+		Public:       &cr.Spec.ForProvider.Public,
+		StorageLimit: &cr.Spec.ForProvider.StorageLimit,
+	}
+
+	err := e.client.NewProject(ctx, projectReq)
+	if err != nil {
+		return managed.ExternalCreation{ExternalNameAssigned: false}, nil
+	}
+
+	meta.SetExternalName(cr, projectReq.ProjectName)
 
 	return managed.ExternalCreation{
 		// Optionally return any details that may be required to connect to the

@@ -4,5 +4,8 @@ kind: Project
 metadata:
   name: sample-project
 spec:
-  public: true
-  storageLimit: 0
+  providerConfigRef:
+    name: harbor-provider
+  forProvider:
+    public: true
+    storageLimit: 0
