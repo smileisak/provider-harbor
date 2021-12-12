@@ -1,8 +1,8 @@
 ---
-apiVersion: dtr.renault.com/v1beta1
+apiVersion: harbor.crossplane.io/v1alpha1
 kind: ProviderConfig
 metadata:
-  name: dtr-provider
+  name: harbor-provider
 spec:
   baseURL: https://core.dev.poc.gcp.renault.com/
   username:

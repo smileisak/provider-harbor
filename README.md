@@ -1,13 +1,9 @@
-# provider-template
+# provider-harbor
 
-`provider-template` is a minimal [Crossplane](https://crossplane.io/) Provider
-that is meant to be used as a template for implementing new Providers. It comes
-with the following features that are meant to be refactored:
+`provider-harbor` is a [Crossplane](https://crossplane.io/) Provider for Harbor.
 
-- A `ProviderConfig` type that only points to a credentials `Secret`.
-- A `MyType` resource type that serves as an example managed resource.
-- A managed resource controller that reconciles `MyType` objects and simply
-  prints their configuration in its `Observe` method.
+Work still in progress ...
+
 
 ## Developing
 
