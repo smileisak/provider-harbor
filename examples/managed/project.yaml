@@ -1,0 +1,8 @@
+---
+apiVersion: harbor.crossplane.io/v1alpha1
+kind: Project
+metadata:
+  name: sample-project
+spec:
+  public: true
+  storageLimit: 0

@@ -7,7 +7,6 @@ import (
 
 // ProjectParameters parameters to pass to ForProvider
 type ProjectParameters struct {
-	Name         string `json:"name,omitempty"`
 	Public       bool   `json:"public,omitempty"`
 	StorageLimit int    `json:"storageLimit,omitempty"`
 }
