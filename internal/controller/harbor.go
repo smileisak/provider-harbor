@@ -19,7 +19,7 @@ package controller
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/provider-harbor/internal/controller/config"
-	"github.com/crossplane/provider-harbor/internal/controller/projects"
+	projects "github.com/crossplane/provider-harbor/internal/controller/projects"
 	"k8s.io/client-go/util/workqueue"
 	ctrl "sigs.k8s.io/controller-runtime"
 )
@@ -29,7 +29,7 @@ import (
 func Setup(mgr ctrl.Manager, l logging.Logger, wl workqueue.RateLimiter) error {
 	for _, setup := range []func(ctrl.Manager, logging.Logger, workqueue.RateLimiter) error{
 		config.Setup,
-		users.SetupProject(),
+		projects.SetupProject,
 	} {
 		if err := setup(mgr, l, wl); err != nil {
 			return err
