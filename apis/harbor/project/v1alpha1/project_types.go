@@ -5,17 +5,20 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+// ProjectParameters parameters to pass to ForProvider
 type ProjectParameters struct {
-	Name string `json:"name,omitempty"`
-	Public bool `json:"public,omitempty"`
-	StorageLimit int `json:"storageLimit,omitempty"`
+	Name         string `json:"name,omitempty"`
+	Public       bool   `json:"public,omitempty"`
+	StorageLimit int    `json:"storageLimit,omitempty"`
 }
 
+// ProjectSpec spec for the project
 type ProjectSpec struct {
 	xpv1.ResourceSpec `json:",inline"`
 	ForProvider       ProjectParameters `json:"forProvider,omitempty"`
 }
 
+// ProjectStatus status for the project
 type ProjectStatus struct {
 	xpv1.ResourceStatus `json:",inline"`
 	AtProvider          ProjectObservation `json:"atProvider,omitempty"`

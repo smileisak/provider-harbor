@@ -8,9 +8,11 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/provider-harbor/apis/harbor/project/v1alpha1"
 	config "github.com/crossplane/provider-harbor/apis/v1alpha1"
+	ctrl "sigs.k8s.io/controller-runtime"
+
 	"github.com/crossplane/provider-harbor/internal/common"
 	"k8s.io/client-go/util/workqueue"
-	ctrl "sigs.k8s.io/controller-runtime"
+
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 )
 

@@ -3,6 +3,7 @@ package projects
 import (
 	"context"
 	"fmt"
+
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/provider-harbor/apis/harbor/project/v1alpha1"
@@ -24,6 +25,7 @@ type External struct {
 	client *apiv2.RESTClient
 }
 
+// Observe runs for reconciliation
 func (e *External) Observe(ctx context.Context, mg resource.Managed) (managed.ExternalObservation, error) {
 
 	cr, ok := mg.(*v1alpha1.Project)
@@ -51,6 +53,7 @@ func (e *External) Observe(ctx context.Context, mg resource.Managed) (managed.Ex
 	}, nil
 }
 
+// Create when CREATE events happens
 func (e *External) Create(ctx context.Context, mg resource.Managed) (managed.ExternalCreation, error) {
 	cr, ok := mg.(*v1alpha1.Project)
 	if !ok {
@@ -66,6 +69,7 @@ func (e *External) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 	}, nil
 }
 
+// Update when UPDATE events happens
 func (e *External) Update(ctx context.Context, mg resource.Managed) (managed.ExternalUpdate, error) {
 	cr, ok := mg.(*v1alpha1.Project)
 	if !ok {
@@ -81,6 +85,7 @@ func (e *External) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 	}, nil
 }
 
+// Delete runs when DELETE events happens
 func (e *External) Delete(ctx context.Context, mg resource.Managed) error {
 	cr, ok := mg.(*v1alpha1.Project)
 	if !ok {

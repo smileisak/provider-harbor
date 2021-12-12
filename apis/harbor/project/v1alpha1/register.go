@@ -8,8 +8,10 @@ import (
 )
 
 const (
+	// KubernetesGroup api group for harbor project
 	KubernetesGroup = "harbor.crossplane.io"
-	Version         = "v1alpha1"
+	// Version api version
+	Version = "v1alpha1"
 )
 
 var (
@@ -19,7 +21,10 @@ var (
 	// SchemeBuilder is used to add go types to the IrnVersionKind scheme
 	SchemeBuilder = &scheme.Builder{GroupVersion: SchemeGroupVersion}
 
-	ProjectKind                    = reflect.TypeOf(Project{}).Name()
+	// ProjectKind used for the controller name
+	ProjectKind = reflect.TypeOf(Project{}).Name()
+
+	// ProjectKubernetesGroupVersionKind  used for to reconcile
 	ProjectKubernetesGroupVersionKind = SchemeGroupVersion.WithKind(ProjectKind)
 )
 
