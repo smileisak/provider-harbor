@@ -4,7 +4,7 @@ kind: ProviderConfig
 metadata:
   name: harbor-provider
 spec:
-  baseURL: https://core.dev.poc.gcp.renault.com/
+  baseURL: https://core.dev.poc.gcp.renault.com
   username:
     source: Secret
     secretRef:
