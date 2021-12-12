@@ -20,7 +20,7 @@ var (
 	SchemeBuilder = &scheme.Builder{GroupVersion: SchemeGroupVersion}
 
 	ProjectKind                    = reflect.TypeOf(Project{}).Name()
-	UserKubernetesGroupVersionKind = SchemeGroupVersion.WithKind(ProjectKind)
+	ProjectKubernetesGroupVersionKind = SchemeGroupVersion.WithKind(ProjectKind)
 )
 
 func init() {

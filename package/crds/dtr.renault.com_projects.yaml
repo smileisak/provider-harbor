@@ -57,9 +57,12 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  fullName:
-                    description: FullName Project full name.
+                  name:
                     type: string
+                  public:
+                    type: boolean
+                  storageLimit:
+                    type: integer
                 type: object
               providerConfigRef:
                 default:

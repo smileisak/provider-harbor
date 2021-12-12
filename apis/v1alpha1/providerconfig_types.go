@@ -27,8 +27,14 @@ import (
 
 // A ProviderConfigSpec defines the desired state of a ProviderConfig.
 type ProviderConfigSpec struct {
-	// Credentials required to authenticate to this provider.
-	Credentials ProviderCredentials `json:"credentials"`
+	// Base URL of the Harbor Service
+	BaseURL string `json:"baseURL,omitempty"`
+
+	//Username used for basic authentication.
+	Username ProviderCredentials `json:"username"`
+
+	//Password used for basic authentication.
+	Password ProviderCredentials `json:"password"`
 }
 
 // ProviderCredentials required to authenticate.

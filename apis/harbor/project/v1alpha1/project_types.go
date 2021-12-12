@@ -6,9 +6,9 @@ import (
 )
 
 type ProjectParameters struct {
-
-	// FullName Project full name.
-	FullName string `json:"fullName,omitempty"`
+	Name string `json:"name,omitempty"`
+	Public bool `json:"public,omitempty"`
+	StorageLimit int `json:"storageLimit,omitempty"`
 }
 
 type ProjectSpec struct {
