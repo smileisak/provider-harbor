@@ -14,4 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Package v1alpha1 contains managed resources for Harbor Project
+// +kubebuilder:object:generate=true
+// +groupName=harbor.crossplane.io
+// +versionName=v1alpha1
 package v1alpha1

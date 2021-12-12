@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	KubernetesGroup = "harbor.renault.com"
+	KubernetesGroup = "harbor.crossplane.io"
 	Version         = "v1alpha1"
 )
 

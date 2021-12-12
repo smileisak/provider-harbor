@@ -19,7 +19,7 @@ package controller
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/provider-harbor/internal/controller/config"
-	projects "github.com/crossplane/provider-harbor/internal/controller/projects"
+	"github.com/crossplane/provider-harbor/internal/controller/projects"
 	"k8s.io/client-go/util/workqueue"
 	ctrl "sigs.k8s.io/controller-runtime"
 )

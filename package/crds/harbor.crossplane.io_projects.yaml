@@ -4,9 +4,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
-  name: projects.dtr.renault.com
+  name: projects.harbor.crossplane.io
 spec:
-  group: dtr.renault.com
+  group: harbor.crossplane.io
   names:
     categories:
     - harbor
