@@ -9,6 +9,7 @@ import (
     "github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
     "github.com/crossplane/crossplane-runtime/pkg/resource"
     "github.com/crossplane/provider-harbor/apis/harbor/project/v1alpha1"
+    "github.com/crossplane/provider-harbor/internal/common"
     "github.com/mittwald/goharbor-client/v5/apiv2"
     "github.com/mittwald/goharbor-client/v5/apiv2/model"
     "github.com/pkg/errors"
@@ -121,7 +122,9 @@ func (e *External) Delete(ctx context.Context, mg resource.Managed) error {
         return errors.New(errNotProject)
     }
 
-    fmt.Printf("Deleting: %+v", cr)
-
+    err := e.client.DeleteProject(ctx, meta.GetExternalName(cr))
+    if err != nil {
+        return errors.Wrap(resource.Ignore(common.ErrorIsNotFound, err), errProjectNotFound)
+    }
     return nil
 }
